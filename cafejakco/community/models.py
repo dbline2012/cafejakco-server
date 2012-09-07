@@ -1,16 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from membership.models import Group
 
 # Create your models here.
-class Group(models.Model):
-    Name = models.CharField(max_length=20, null=False)
-    created = models.DateTimeField(auto_now_add=True, auto_now=True)
-    
-    def __unicode__(self):
-        return self.Title    
-
-    def save(self, *args, **kwargs):
-        return super(Entry, self).save(*args, **kwargs)
 
 class Entry(models.Model):
     User = models.ForeignKey(User)
