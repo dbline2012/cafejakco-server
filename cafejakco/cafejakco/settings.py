@@ -1,4 +1,6 @@
 # Django settings for cafejakco project.
+import os
+ROOT_PATH = os.path.dirname(__file__)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -67,6 +69,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    ROOT_PATH + '/templates/static',
 )
 
 # List of finder classes that know how to find static files in
