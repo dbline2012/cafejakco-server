@@ -4,7 +4,7 @@ from tastypie.authorization import Authorization, DjangoAuthorization
 from tastypie.authentication import BasicAuthentication
 
 from django.contrib.auth.models import User
-from community.models import Entry
+from community.models import *
 
 
 class UserResource(ModelResource):
@@ -17,16 +17,23 @@ class UserResource(ModelResource):
         }
 
 class EntryResource(ModelResource):
-    User = fields.ForeignKey(UserResource, 'User')
+    user = fields.ForeignKey(UserResource, 'user')
 
     class Meta:
-        queryset = Entry.objects.all()
-        resource_name = 'entry'
+        queryset = Article.objects.all()
+        resource_name = 'article'
         excludes = ['Group']
-        fields = ['User', 'Title', 'Content', 'Created', 'Comments']
+        fields = ['user', 'title', 'content', 'created', 'comments']
         allowed_methods = ['get', 'post']
         authorization = Authorization()
         #filtering = {
         #    'User': ALL_WITH_RELATIONS,
         #    'Created': ['exact', 'lt', 'lte', 'gte', 'gt'],
         #}
+        
+#class CommentResource(ModelResource):
+#    user = fields.ForeignKey(UserResource, 'user')
+#    article = fields.ForeignKey(EntryResource, 'article')
+#    
+#    class Meta:
+#        queryset = Comment.obejcts.filter(article=)
