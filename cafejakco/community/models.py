@@ -20,7 +20,7 @@ class Article(models.Model):
     created = models.DateTimeField(auto_now_add=True, auto_now=True)
     comments = models.PositiveSmallIntegerField(default=0, null=True)
     likes = models.PositiveSmallIntegerField(default=0, null=True)
-    image = models.CharField(max_length=80, null=False)
+    image = models.CharField(max_length=80, null=True)
       
     def __unicode__(self):
         return self.title    
