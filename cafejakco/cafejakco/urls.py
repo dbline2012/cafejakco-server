@@ -25,4 +25,9 @@ urlpatterns = patterns('',
     
     # REST API
     url(r'^api/', include(jakco_api.urls)),
+    
+    # Jakco Service view
+    url(r'^$', 'community.views.index'),
+    url(r'^community/$', 'community.views.communityService'),
+    url(r'^community/(?P<group_id>\d+)/$', 'community.views.communityServiceDetail'),
 )

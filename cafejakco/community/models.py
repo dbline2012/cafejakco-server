@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Group(models.Model):
-    name = models.CharField(max_length=20, null=False)
+    name = models.CharField(max_length=20, null=False, unique=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=True)
     
     def __unicode__(self):
@@ -25,8 +25,8 @@ class Article(models.Model):
     def __unicode__(self):
         return self.title    
 
-    def save(self, *args, **kwargs):
-        return super(Article, self).save(*args, **kwargs)
+    #def save(self, *args, **kwargs):
+    #    return super(Article, self).save(*args, **kwargs)
 
 class Comment(models.Model):
     user = models.ForeignKey(User)
