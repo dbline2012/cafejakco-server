@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.conf.urls import patterns, include, url
 from tastypie.api import Api
 from community.api import EntryResource, UserResource
