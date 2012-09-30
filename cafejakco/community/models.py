@@ -11,6 +11,14 @@ class Group(models.Model):
 
     def save(self, *args, **kwargs):
         return super(Group, self).save(*args, **kwargs)
+    
+    def serialize(self):
+        data = {
+                'group_id':self.id,
+                'group_name':self.name,
+                'created':str(self.created),
+                }
+        return data
 
 class Article(models.Model):
     user = models.ForeignKey(User)
@@ -25,8 +33,24 @@ class Article(models.Model):
     def __unicode__(self):
         return self.title    
 
-    #def save(self, *args, **kwargs):
-    #    return super(Article, self).save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        return super(Article, self).save(*args, **kwargs)
+    
+    def serialize(self):
+        data = {
+                'user_id':self.user.id,
+                'user_name':self.user.username,
+                'group_name':self.group.name,
+                'group_id':self.group.id,
+                'article_id':self.id,
+                'title':self.title,
+                'content':self.content,
+                'comments':self.comments,
+                'likes':self.likes,
+                'image':self.image,
+                'created':str(self.created),
+                }
+        return data
 
 class Comment(models.Model):
     user = models.ForeignKey(User)
@@ -39,3 +63,12 @@ class Comment(models.Model):
     
     def save(self, *args, **kwargs):
         return super(Comment, self).save(*args, **kwargs)
+    
+    def serialzie(self):
+        data = {
+                'user_id':self.user.id,
+                'user_name':self.user.username,
+                'content':self.content,
+                'article_id':self.article.id,
+                'created':str(self.created),
+                }

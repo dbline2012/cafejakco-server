@@ -28,6 +28,8 @@ urlpatterns = patterns('',
     
     # Jakco Service view
     url(r'^$', 'community.views.index'),
-    url(r'^community/$', 'community.views.communityService'),
-    url(r'^community/(?P<group_id>\d+)/$', 'community.views.communityServiceDetail'),
+    url(r'^community/$', 'community.views.groupResource'),
+    url(r'^community/(?P<group_id>\d+)/$', 'community.views.articleResource'),
+    url(r'^community/(?P<group_id>\d+)/(?P<article_id>\d+)/$', 'community.views.articleDetailResource'),
+    url(r'^community/image$', 'community.views.communityImageResource'),
 )
