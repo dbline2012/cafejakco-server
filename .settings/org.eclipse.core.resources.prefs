@@ -1,2 +1,4 @@
 eclipse.preferences.version=1
+encoding//cafejakco/checkin/views.py=utf-8
 encoding//cafejakco/community/views.py=utf-8
+encoding//cafejakco/membership/views.py=utf-8

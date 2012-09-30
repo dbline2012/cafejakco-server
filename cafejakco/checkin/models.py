@@ -11,3 +11,11 @@ class Checkin(models.Model):
 
     def save(self, *args, **kwargs):
         return super(Checkin, self).save(*args, **kwargs)
+    
+    def serialize(self):
+        data = {
+                'user_id':self.user.id,
+                'user_name':self.user.username,
+                'date':str(self.date),
+                }
+        return data

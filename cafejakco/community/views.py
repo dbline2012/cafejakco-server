@@ -16,7 +16,6 @@ def index(request):
 
 @csrf_exempt
 def groupResource(request):
-    #print request
     if request.method == 'GET':
         groups = Group.objects.all()
         print groups

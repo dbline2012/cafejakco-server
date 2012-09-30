@@ -40,8 +40,8 @@ class Article(models.Model):
         data = {
                 'user_id':self.user.id,
                 'user_name':self.user.username,
-                'group_name':self.group.name,
                 'group_id':self.group.id,
+                'group_name':self.group.name,  
                 'article_id':self.id,
                 'title':self.title,
                 'content':self.content,

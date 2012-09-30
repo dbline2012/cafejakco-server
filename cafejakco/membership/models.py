@@ -17,6 +17,20 @@ class Member(models.Model):
     def save(self, *args, **kwargs):
         return super(Member, self).save(*args, **kwargs)
     
+    def serialize(self):
+        data = {
+                'user_id':self.user.id,
+                'user_name':self.user.username,
+                'group_id':self.group.id,
+                'group_name':self.group.name,
+                'member_id':self.id,
+                'sex':self.sex,
+                'nickname':self.nickname,
+                'point':self.point,
+                'image':self.image,
+                }
+        return data
+    
 class Coupon(models.Model):
     title = models.CharField(max_length=80, null=False)
     content = models.TextField(null=False)
@@ -29,3 +43,12 @@ class Coupon(models.Model):
     def save(self, *args, **kwargs):
         return super(Coupon, self).save(*args, **kwargs)
     
+    def serialize(self):
+        data = {
+                'coupon_id':self.id,
+                'title':self.title,
+                'content':self.content,
+                'created':str(self.created),
+                'end':self.end,
+                }
+        return data
