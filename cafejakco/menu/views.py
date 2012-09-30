@@ -1,20 +1,23 @@
 # -*- coding : utf-8 -*-
-# Create your views here
+# Create your views her
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, Http404
 from menu.models import *
 @csrf_exempt
-
 def Database(request):
     #print request
     if request.method == 'GET':
        menus = Menu.objects.all()
        return toJson(serialize(menus))
+    elif request.method == 'POST':
+       print request.POST['name']
+    elif request.method == 'DELETE':
+       print 'deleted'
     return HttpResponse('/menu')
 
 def serialize(objs):
-    serialized = {}
+    serialized = []
     for obj in objs:
         serialized.append(obj.serialize())
     return serialized

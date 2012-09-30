@@ -12,3 +12,9 @@ class Notice(models.Model):
 
     def save(self, *args, **kwargs):
         return super(Notice, self).save(*args, **kwargs)
+    
+    def serialize(self):
+	data = {'title':self.title,
+		#'content':self.content,
+		}
+	return data
