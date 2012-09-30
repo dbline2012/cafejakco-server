@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Create your views here
 import json
 from django.http impprt HttpResponse, Http404

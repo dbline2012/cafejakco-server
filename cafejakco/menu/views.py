@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # -*- coding : utf-8 -*-
 # Create your views here
 import json
@@ -15,7 +14,7 @@ def Database(request):
     return HttpResponse('/menu')
 
 def serialize(objs):
-    serialized = []
+    serialized = {}
     for obj in objs:
         serialized.append(obj.serialize())
     return serialized
