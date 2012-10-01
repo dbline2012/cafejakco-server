@@ -40,19 +40,23 @@ def memberResource(request):
   
 @csrf_exempt
 def memberDetailResource(request, user_id=1):
-    user_id = int(user_id)
-    
+    user_id = int(user_id)  
     if request.method == 'GET':
-        u = User.objects.get(id=user_id)
-        m = Member.objects.filter(user=u)
-        return toJson(serialize(m))
+        try:
+            u = User.objects.get(id=user_id)
+            m = Member.objects.filter(user=u)
+            return toJson(serialize(m))
+        except:
+            raise Http404
         
 @csrf_exempt      
 def couponResource(request):
     if request.method == 'GET':
-        coupons = Coupon.objects.all()
-        return toJson(serialize(coupons))
-    
+        try:
+            coupons = Coupon.objects.all()
+            return toJson(serialize(coupons))
+        except:
+            raise Http404
     elif request.method == 'POST':
         post_json_data = json.loads(request.raw_post_data)
         
@@ -66,3 +70,17 @@ def couponResource(request):
             return toJson({'status':'create success'})
         except:
             return toJson({'status':'create fail'}, 400)
+      
+@csrf_exempt   
+def couponDetailResource(request, coupon_id=1):
+    coupon_id = int(coupon_id)    
+    if request.method == 'GET':
+        try:
+            c = Coupon.objects.filter(id=coupon_id)
+            return toJson(serialize(c))
+        except:
+            raise Http404
+    
+    
+    
+    

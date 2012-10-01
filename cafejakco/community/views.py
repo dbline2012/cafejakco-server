@@ -10,16 +10,21 @@ from cafejakco.util import serialize, toJson
 import json
 
 def index(request):
-    articles = Article.objects.all()
-    print articles
-    return toJson(serialize(articles))
+    try:
+        articles = Article.objects.all()
+        print articles
+        return toJson(serialize(article))
+    except:
+        raise Http404
 
 @csrf_exempt
 def groupResource(request):
     if request.method == 'GET':
-        groups = Group.objects.all()
-        print groups
-        return toJson(serialize(groups)) 
+        try:
+            groups = Group.objects.all()
+            return toJson(serialize(group))
+        except:
+            raise Http404
        
     elif request.method == 'POST':
         post_json_data = json.loads(request.raw_post_data)
@@ -34,7 +39,7 @@ def groupResource(request):
     elif request.method == 'DELETE':
         print 'DELETE method'
         
-    return HttpResponse('/coumunity')
+    return HttpResponse('Func:groupResource')
 
 @csrf_exempt
 def articleResource(request, group_id=1):
@@ -45,7 +50,7 @@ def articleResource(request, group_id=1):
             a = Article.objects.filter(group=g)
             return toJson(serialize(a))        
         except:
-            return HttpResponse('존재하지않습니다.')
+            raise Http404
         
     elif request.method == 'POST':
         post_json_data = json.loads(request.raw_post_data)
@@ -76,7 +81,7 @@ def articleDetailResource(request, group_id=1, article_id=1):
             print a
             return toJson(serialize(a))        
         except:
-            return HttpResponse('존재하지않습니다.')
+            raise Http404
 
 
 @csrf_exempt

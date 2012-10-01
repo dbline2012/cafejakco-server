@@ -7,7 +7,7 @@ class Checkin(models.Model):
     date = models.DateTimeField(auto_now_add=True, auto_now=True)
     
     def __unicode__(self):
-        return self.name    
+        return self.user.username    
 
     def save(self, *args, **kwargs):
         return super(Checkin, self).save(*args, **kwargs)

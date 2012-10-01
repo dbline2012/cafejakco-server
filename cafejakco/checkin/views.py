@@ -9,15 +9,39 @@ from cafejakco.util import serialize, toJson
 import json
 
 @csrf_exempt
+def checkinResource(request):
+    if request.method == 'GET':
+        try:
+            checkins = Checkin.objects.all()
+            return toJson(serialize(checkins))
+        except:
+            return Http404
+        
+    elif request.method == 'POST':
+        post_json_data = json.loads(request.raw_post_data)
+        
+        try:
+            u = User.objects.get(id=post_json_data['user_id'])
+            
+            ch = Checkin(
+                         user=u,
+                         )
+            ch.save()
+            return toJson({'status':'create success'})
+        except:
+            return toJson({'status':'create fail'}, 400)
+
+@csrf_exempt
 def userCheckinResource(request, user_id=1):
     user_id = int(user_id)
     
     if request.method == 'GET':
         try:
             u = User.objects.get(id=user_id)
-            checkins = Checkin.objects.filter(user=u)
-            return toJson(serialize(checkins))
+            ch = Checkin.objects.filter(user=u)
+            return toJson(serialize(ch))
         except:
-            return HttpResponse('존재하지않습니다.')
+            raise Http404
+
         
     
