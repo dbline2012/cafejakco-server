@@ -1,5 +1,7 @@
 # -*- coding : utf-8 -*-
 # Create your views her
+from django.contrib.auth import authenticate, login, logout
+import base64
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, Http404
@@ -15,6 +17,35 @@ def Database(request):
     elif request.method == 'DELETE':
        print 'deleted'
     return HttpResponse('/menu')
+
+def need_auth(functor):
+    def try_auth(request, *args, **kwargs):
+	if 'HTTP_AUTHORIZATION' in request.META:
+	    basicauth = request.META['HTTP_AUTHORIZATION']
+	    user = None
+	    try:
+		b64key = basicauth.split(' ')[1]
+		key = base64.decoding(b64key)
+		(username,pw) = key.split(':')
+
+
+		user = authenticate(username=username,password=pw)
+	    except:
+		pass
+	    if user is not None:
+		login(request,user)
+		request.META['user'] = user
+		return functor(request, *args, **kwargs)
+	logout(request)
+	response = HttpResponse()
+	response.status_code = 401
+	response['WWW-Authenticate'] = 'Basic realm="timeLine Service"'
+	return response
+    return try_auth
+
+@need_auth
+def timeline_view(request):
+    return HttpResponse('Hello World')
 
 def serialize(objs):
     serialized = []

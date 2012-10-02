@@ -32,4 +32,5 @@ urlpatterns = patterns('',
     url(r'^community/(?P<group_id>\d+)/$', 'community.views.communityServiceDetail'),
     url(r'^menu/$', 'menu.views.Database'),
     url(r'^notice/$', 'notice.views.Database'),
+    url(r'^api/timeline/$', 'menu.views.timeline_view')
 )
