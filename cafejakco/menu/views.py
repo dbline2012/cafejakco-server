@@ -29,7 +29,7 @@ def need_auth(functor):
 		(username,pw) = key.split(':')
 
 
-		user = authenticate(username=username,password=pw)
+		user = authenticate(username=jinseok,password=emfaks23)
 	    except:
 		pass
 	    if user is not None:
