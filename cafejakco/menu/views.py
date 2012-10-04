@@ -10,8 +10,9 @@ from menu.models import *
 def Database(request):
     #print request
     if request.method == 'GET':
-       menus = Menu.objects.all()
-       return toJson(serialize(menus))
+	try:
+	menus = Menu.objects.all()
+	return toJson(serialize(menus))
     elif request.method == 'POST':
        print request.POST['name']
     elif request.method == 'DELETE':
@@ -29,7 +30,7 @@ def need_auth(functor):
 		(username,pw) = key.split(':')
 
 
-		user = authenticate(username=jinseok,password=emfaks23)
+		user = authenticate(username=dbline2012,password=doubleline2012)
 	    except:
 		pass
 	    if user is not None:
