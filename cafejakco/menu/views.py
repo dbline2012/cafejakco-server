@@ -2,21 +2,22 @@
 # Create your views her
 from django.contrib.auth import authenticate, login, logout
 import base64
-import json
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, Http404
 from menu.models import *
+from cafejakco.util import serialize, toJson
 @csrf_exempt
 def Database(request):
     #print request
     if request.method == 'GET':
 	try:
-	menus = Menu.objects.all()
-	return toJson(serialize(menus))
+	    menus = Menu.objects.all()
+	except:
+	    return toJson(serialize(menus))
     elif request.method == 'POST':
-       print request.POST['name']
+	print request.POST['name']
     elif request.method == 'DELETE':
-       print 'deleted'
+	print 'deleted'
     return HttpResponse('/menu')
 
 def need_auth(functor):
@@ -47,13 +48,3 @@ def need_auth(functor):
 @need_auth
 def timeline_view(request):
     return HttpResponse('Hello World')
-
-def serialize(objs):
-    serialized = []
-    for obj in objs:
-        serialized.append(obj.serialize())
-    return serialized
-
-def toJson(objs, status=200):
-    j = json.dumps(objs, ensure_ascii=False)
-    return HttpResponse(j, status=status, content_type='application/json; charset=utf-8')
