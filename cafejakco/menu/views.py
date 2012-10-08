@@ -5,9 +5,14 @@ from django.http import HttpResponse, Http404
 from menu.models import *
 from cafejakco.util import serialize, toJson
 from cafejakco.m_auth import need_auth
+import json
+
+def index(request):
+    try:
+	menus = Menu.objects.all()
+	return toJson(serialize(menus))
 @csrf_exempt
-def Database(request):
-    #print request
+def MenuResource(request):
     if request.method == 'GET':
 	try:
 	    menus = Menu.objects.all()
