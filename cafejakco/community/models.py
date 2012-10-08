@@ -64,7 +64,7 @@ class Comment(models.Model):
     def save(self, *args, **kwargs):
         return super(Comment, self).save(*args, **kwargs)
     
-    def serialzie(self):
+    def serialize(self):
         data = {
                 'user_id':self.user.id,
                 'user_name':self.user.username,
