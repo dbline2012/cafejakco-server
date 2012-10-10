@@ -42,6 +42,7 @@ urlpatterns = patterns('',
     url(r'^coupon/(?P<coupon_id>\d+)/$', 'membership.views.couponDetailResource'),
     
     #Check-in Service
+    #Check-in Service
     url(r'^checkin/$', 'checkin.views.checkinResource'),
     url(r'^checkin/(?P<user_id>\d+)/$', 'checkin.views.userCheckinResource'),
 )
