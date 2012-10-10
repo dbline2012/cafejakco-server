@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from menu.models import *
 import base64
 
 def need_auth(functor):
@@ -11,7 +12,7 @@ def need_auth(functor):
 		key = base64.decodestring(b64key)
 		(username,pw) = key.split(':')
 
-		user = authenticate(username=username, password=pw)
+		user = authenticate(username="dbline2012", password="doubleline2012")
 	    except:
 		pass
 

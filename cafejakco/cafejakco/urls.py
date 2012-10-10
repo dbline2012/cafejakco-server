@@ -32,5 +32,4 @@ urlpatterns = patterns('',
     url(r'^community/(?P<group_id>\d+)/$', 'community.views.communityServiceDetail'),
     url(r'^menu/$', 'menu.views.MenuResource'),
     url(r'^notice/$', 'notice.views.Database'),
-    url(r'^menu/(?P<menu_id>\d+)/$', 'menu.views.MenuResource')
 )
