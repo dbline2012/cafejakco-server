@@ -1,5 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponse
 from menu.models import *
+from menu.views import *
 import base64
 
 def need_auth(functor):
@@ -21,9 +23,9 @@ def need_auth(functor):
 		request.META['user'] = user
 		return functor(request, *args, **kwargs)
 
-	    logout(request)
-	    response = HttpResponse()
-	    response.status_code = 401
-	    response['WWW-Authenticate'] = 'Basic realm="timeLine Service"'
-	    return response
-	return try_auth
+	logout(request)
+	response = HttpResponse("Test")
+	response.status_code = 401
+	response['WWW-Authenticate'] = 'Basic realm="timeLine Service"'
+	return response
+    return try_auth

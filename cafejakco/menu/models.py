@@ -15,7 +15,7 @@ class Menu(models.Model):
 
     def serialize(self):
         data = {
-                'name':self.name,
+                'name':self.name_id,
                 'category':self.category,
                 'desc':self.desc,
                 'cost':self.cost,

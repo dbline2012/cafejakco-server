@@ -13,7 +13,7 @@ def index(request):
     try:
         articles = Article.objects.all()
         print articles
-        return toJson(serialize(article))
+        return toJson(serialize(articles))
     except:
         raise Http404
 
@@ -22,7 +22,7 @@ def groupResource(request):
     if request.method == 'GET':
         try:
             groups = Group.objects.all()
-            return toJson(serialize(group))
+            return toJson(serialize(groups))
         except:
             raise Http404
        

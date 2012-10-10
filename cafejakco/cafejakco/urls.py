@@ -33,7 +33,7 @@ urlpatterns = patterns('',
     url(r'^community/$', 'community.views.groupResource'),
     url(r'^community/(?P<group_id>\d+)/$', 'community.views.articleResource'),
     url(r'^community/(?P<group_id>\d+)/(?P<article_id>\d+)/$', 'community.views.articleDetailResource'),
-    url(r'^community/image$', 'community.views.communityImageResource'),
+    url(r'^community/image/$', 'community.views.communityImageResource'),
     
     #Membership Service
     url(r'^membership/$', 'membership.views.memberResource'),
@@ -46,10 +46,9 @@ urlpatterns = patterns('',
     url(r'^checkin/(?P<user_id>\d+)/$', 'checkin.views.userCheckinResource'),
     url(r'^community/$', 'community.views.communityService'),
     url(r'^community/(?P<group_id>\d+)/$', 'community.views.communityServiceDetail'),
-    url(r'^menu/$', 'menu.views.MenuResource'),
-    url(r'^notice/$', 'notice.views.Database'),
     #Menu Service
-    url(r'^menu/$', 'menu.views.Database'),
+    url(r'^menu/$', 'menu.views.MenuResource'),
+    url(r'^menu/(?P<menu_id>\d+)/$', 'menu.views.MenuList'),
     #Notice Service
-    url(r'^notice/$', 'notice.views.Database'),
+    url(r'^notice/$', 'notice.views.NoticeResource'),
 )
