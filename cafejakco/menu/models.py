@@ -14,9 +14,10 @@ class Menu(models.Model):
         return super(Menu, self).save(*args, **kwargs)
 
     def serialize(self):
-        data = {'name':self.name,
+        data = {
+                'name':self.name,
                 'category':self.category,
                 'desc':self.desc,
                 'cost':self.cost,
-               } 
-	return data
+               }
+        return data

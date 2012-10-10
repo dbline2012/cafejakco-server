@@ -28,7 +28,6 @@ urlpatterns = patterns('',
     
     # Jakco Service view
     url(r'^$', 'community.views.index'),
-<<<<<<< HEAD
     
     #Community Service
     url(r'^community/$', 'community.views.groupResource'),
@@ -45,10 +44,12 @@ urlpatterns = patterns('',
     #Check-in Service
     url(r'^checkin/$', 'checkin.views.checkinResource'),
     url(r'^checkin/(?P<user_id>\d+)/$', 'checkin.views.userCheckinResource'),
-=======
     url(r'^community/$', 'community.views.communityService'),
     url(r'^community/(?P<group_id>\d+)/$', 'community.views.communityServiceDetail'),
     url(r'^menu/$', 'menu.views.MenuResource'),
     url(r'^notice/$', 'notice.views.Database'),
->>>>>>> jinseok-dev
+    #Menu Service
+    url(r'^menu/$', 'menu.views.Database'),
+    #Notice Service
+    url(r'^notice/$', 'notice.views.Database'),
 )

@@ -14,7 +14,8 @@ class Notice(models.Model):
         return super(Notice, self).save(*args, **kwargs)
     
     def serialize(self):
-	data = {'title':self.title,
-		#'content':self.content,
-		}
-	return data
+        data = {
+                'title':self.title,
+                #'content':self.content,
+                }
+        return data
