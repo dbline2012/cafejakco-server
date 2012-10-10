@@ -15,3 +15,4 @@ def Database(request):
 	print request.POST['title']
     elif request.method == 'DELETE':
 	print 'deleted'
+    return HttpResponse('/notice')

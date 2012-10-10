@@ -18,6 +18,7 @@ def need_auth(functor):
 	    if user is not None:
 		login(request, user)
 		request.META['user'] = user
+		return functor(request, *args, **kwargs)
 
 	    logout(request)
 	    response = HttpResponse()
