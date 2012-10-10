@@ -158,3 +158,4 @@ LOGGING = {
         },
     }
 }
+SERIALIZATION_MODULES = { 'json': 'cafejakco.django.serializers.json'}
