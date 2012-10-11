@@ -6,9 +6,11 @@ from django.contrib.auth.models import User
 from checkin.models import *
 from django.views.decorators.csrf import csrf_exempt
 from cafejakco.util import serialize, toJson
+from cafejakco.auth import need_auth
 import json
 
 @csrf_exempt
+@need_auth
 def checkinResource(request):
     if request.method == 'GET':
         try:
@@ -32,6 +34,7 @@ def checkinResource(request):
             return toJson({'status':'create fail'}, 400)
 
 @csrf_exempt
+@need_auth
 def userCheckinResource(request, user_id=1):
     user_id = int(user_id)
     
