@@ -6,18 +6,18 @@ from menu.models import *
 from cafejakco.util import serialize, toJson
 from cafejakco.m_auth import need_auth
 @csrf_exempt
-def Database(request):
+def menuResource(request):
     #print request
     if request.method == 'GET':
-	try:
-	    menus = Menu.objects.all()
-	    return toJson(serialize(menus))
-	except:
-	    pass
+        try:
+            menus = Menu.objects.all()
+            return toJson(serialize(menus))
+        except:
+            return Http404
     elif request.method == 'POST':
-	print request.POST['name']
+        print request.POST['name']
     elif request.method == 'DELETE':
-	print 'deleted'
+        print 'deleted'
     return HttpResponse('/menu')
 
 @csrf_exempt

@@ -7,11 +7,12 @@ from cafejakco.util import serialize, toJson
 def Database(request):
     #print request
     if request.method == 'GET':
-	try:
-	    notices = Notice.objects.all()
-	except:
-	    return toJson(serialize(notices))
+        try:
+            notices = Notice.objects.all()
+            return toJson(serialize(notices))
+        except:
+            return Http404
     elif request.method == 'POST':
-	print request.POST['title']
+        print request.POST['title']
     elif request.method == 'DELETE':
-	print 'deleted'
+        print 'deleted'
