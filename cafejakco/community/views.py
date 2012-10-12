@@ -7,22 +7,25 @@ from community.models import *
 from django.template import Context, loader
 from django.views.decorators.csrf import csrf_exempt
 from cafejakco.util import serialize, toJson
+from cafejakco.auth import need_auth
 import json
 
+@need_auth
 def index(request):
     try:
         articles = Article.objects.all()
         print articles
-        return toJson(serialize(article))
+        return toJson(serialize(articles))
     except:
         raise Http404
 
 @csrf_exempt
+@need_auth
 def groupResource(request):
     if request.method == 'GET':
         try:
             groups = Group.objects.all()
-            return toJson(serialize(group))
+            return toJson(serialize(groups))
         except:
             raise Http404
        
@@ -42,6 +45,7 @@ def groupResource(request):
     return HttpResponse('Func:groupResource')
 
 @csrf_exempt
+@need_auth
 def articleResource(request, group_id=1):
     group_id = int(group_id)
     if request.method == 'GET':
@@ -70,7 +74,8 @@ def articleResource(request, group_id=1):
         except:
             return toJson({'status':'create fail'}, 400)
  
-@csrf_exempt       
+@csrf_exempt
+@need_auth
 def articleDetailResource(request, group_id=1, article_id=1):
     group_id = int(group_id)
     article_id = int(article_id)
@@ -85,5 +90,6 @@ def articleDetailResource(request, group_id=1, article_id=1):
 
 
 @csrf_exempt
+@need_auth
 def communityImageResource(request):
     return HttpResponse('/community/image')
