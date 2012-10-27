@@ -47,7 +47,7 @@ urlpatterns = patterns('',
     #Menu Service
     url(r'^menu/$', 'menu.views.menuResource'),
     url(r'^menu/(?P<menu_id>\d+)/$', 'menu.views.menuDetailResource'),
-	url(r'^menu/image/$', 'menu.views.menuImagePost'),
+	#url(r'^menu/image/$', 'menu.views.menuImagePost'),
 
     #Notice Service
 	url(r'^notice/$', 'notice.views.noticeResource'),
