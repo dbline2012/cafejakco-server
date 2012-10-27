@@ -19,7 +19,7 @@ def menuResource(request):
 		post_json_data = json.loads(request.raw_post_data)
 		try:
 			m = Menu(
-					name=post_json_data['name']
+					name=post_json_data['name'],
 					)
 			m.save()
 			return toJson({'status':'create success'})
@@ -30,7 +30,6 @@ def menuResource(request):
 	return HttpResponse('Func:menuResource')
 
 @csrf_exempt
-@need_auth
 def menuDetailResource(request, menu_id=1):
 	menu_id = int(menu_id)
 	if request.method == 'GET':

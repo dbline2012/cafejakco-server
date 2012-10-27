@@ -69,7 +69,6 @@ def articleResource(request, group_id=1):
             return toJson({'status':'create fail'}, 400)
  
 @csrf_exempt
-#@need_auth
 def articleDetailResource(request, group_id=1, article_id=1):
     group_id = int(group_id)
     article_id = int(article_id)

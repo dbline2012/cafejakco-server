@@ -33,7 +33,6 @@ def checkinResource(request):
             return toJson({'status':'create fail'}, 400)
 
 @csrf_exempt
-@need_auth
 def userCheckinResource(request, user_id=1):
     user_id = int(user_id)
     

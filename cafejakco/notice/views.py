@@ -23,7 +23,7 @@ def noticeResource(request, notice_id=1):
 						title=post_json_data['title'],
 						content=post_json_data['content'],
 						created=post_json_data['created'],
-					  )
+						)
 			n.save()
 			return toJson({'status':'create success'})
 		except:
@@ -33,7 +33,6 @@ def noticeResource(request, notice_id=1):
 	return HttpResponse('/notice')
 
 @csrf_exempt
-@need_auth
 def noticeDetailResource(request, notice_id=1):
 	notice_id = int(notice_id)
 	if request.method == 'GET':
@@ -48,7 +47,7 @@ def noticeDetailResource(request, notice_id=1):
 		try:
 			n = Notice(
 						image=post_json_data['image'],
-					  )
+					)
 			n.save()
 			return toJson({'status':'create success'})
 		except:
