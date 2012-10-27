@@ -18,7 +18,6 @@ def index(request):
         raise Http404
 
 @csrf_exempt
-@need_auth
 def groupResource(request):
     if request.method == 'GET':
         try:
@@ -26,7 +25,6 @@ def groupResource(request):
             return toJson(serialize(groups))
         except:
             raise Http404
-       
     elif request.method == 'POST':
         post_json_data = json.loads(request.raw_post_data)
         try:
@@ -45,7 +43,6 @@ def groupResource(request):
 def articleResource(request, group_id=1):
     group_id = int(group_id)
     if request.method == 'GET':
-		@need_auth
         try:
             g = Group.objects.get(id=group_id)
             a = Article.objects.filter(group=g)

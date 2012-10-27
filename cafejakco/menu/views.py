@@ -8,7 +8,6 @@ from cafejakco.util import serialize, toJson
 from cafejakco.auth import need_auth
 
 @csrf_exempt
-@need_auth
 def MenuResource(request):
 	if request.method == 'GET':
 		try:

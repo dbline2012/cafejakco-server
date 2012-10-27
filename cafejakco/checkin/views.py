@@ -10,7 +10,6 @@ from cafejakco.auth import need_auth
 import json
 
 @csrf_exempt
-@need_auth
 def checkinResource(request):
     if request.method == 'GET':
         try:
@@ -45,6 +44,3 @@ def userCheckinResource(request, user_id=1):
             return toJson(serialize(ch))
         except:
             raise Http404
-
-        
-    
