@@ -9,7 +9,7 @@ from cafejakco.auth import need_auth
 
 @csrf_exempt
 @need_auth
-def menuResource(request):
+def MenuResource(request):
 	if request.method == 'GET':
 		try:
 			menus = Menu.objects.all()
@@ -32,7 +32,7 @@ def menuResource(request):
 
 @csrf_exempt
 @need_auth
-def MenuList(request, menu_id=1):
+def MenuDetailResource(request, menu_id=1):
 	menu_id = int(menu_id)
 	if request.method == 'GET':
 		try:
@@ -41,3 +41,8 @@ def MenuList(request, menu_id=1):
 			return toJson(serialize(m))
 		except:
 			raise Http404
+	elif request.method == 'PUT':
+		pass
+	elif request.method == 'DELETE':
+		print 'deleted'
+	return HttpResponse('Func:menuDetailResource')	

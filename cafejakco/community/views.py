@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Create your views here.
 from django.http import HttpResponse, Http404
 from django.contrib.auth.models import User
@@ -10,7 +9,6 @@ from cafejakco.util import serialize, toJson
 from cafejakco.auth import need_auth
 import json
 
-@need_auth
 def index(request):
     try:
         articles = Article.objects.all()
@@ -31,7 +29,6 @@ def groupResource(request):
        
     elif request.method == 'POST':
         post_json_data = json.loads(request.raw_post_data)
-    
         try:
             g = Group(name=post_json_data['name'])
             g.save()
@@ -45,10 +42,10 @@ def groupResource(request):
     return HttpResponse('Func:groupResource')
 
 @csrf_exempt
-@need_auth
 def articleResource(request, group_id=1):
     group_id = int(group_id)
     if request.method == 'GET':
+		@need_auth
         try:
             g = Group.objects.get(id=group_id)
             a = Article.objects.filter(group=g)
@@ -90,6 +87,5 @@ def articleDetailResource(request, group_id=1, article_id=1):
 
 
 @csrf_exempt
-@need_auth
 def communityImageResource(request):
     return HttpResponse('/community/image')
