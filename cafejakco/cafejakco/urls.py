@@ -45,8 +45,11 @@ urlpatterns = patterns('',
     url(r'^checkin/$', 'checkin.views.checkinResource'),
     url(r'^checkin/(?P<user_id>\d+)/$', 'checkin.views.userCheckinResource'),
     #Menu Service
-    url(r'^menu/$', 'menu.views.menuResource'),
-    url(r'^menu/(?P<menu_id>\d+)/$', 'menu.views.MenuList'),
+    url(r'^menu/$', 'menu.views.MenuResource'),
+    url(r'^menu/(?P<menu_id>\d+)/$', 'menu.views.menuDetailResource'),
+	url(r'^menu/image/$', 'menu.views.menuImagePost'),
+
     #Notice Service
-    url(r'^notice/$', 'notice.views.NoticeResource'),
+	url(r'^notice/$', 'notice.views.noticeResource'),
+	url(r'^notice/(?P<notice_id>\d+)/$', 'notice.views.noticeDetailResource'),
 )

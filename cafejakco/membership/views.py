@@ -11,7 +11,6 @@ from cafejakco.auth import need_auth
 import json
 
 @csrf_exempt
-@need_auth
 def memberResource(request):
     if request.method == 'GET':
         members = Member.objects.all()
@@ -53,7 +52,6 @@ def memberDetailResource(request, user_id=1):
             raise Http404
         
 @csrf_exempt
-@need_auth
 def couponResource(request):
     if request.method == 'GET':
         try:
