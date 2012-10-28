@@ -32,6 +32,7 @@ urlpatterns = patterns('',
     #Community Service
     url(r'^community/$', 'community.views.groupResource'),
     url(r'^community/(?P<group_id>\d+)/$', 'community.views.articleResource'),
+	url(r'^community/login/$', 'community.views.Login'),
     url(r'^community/(?P<group_id>\d+)/(?P<article_id>\d+)/$', 'community.views.articleDetailResource'),
     url(r'^community/image/$', 'community.views.communityImageResource'),
     
@@ -52,4 +53,5 @@ urlpatterns = patterns('',
     #Notice Service
 	url(r'^notice/$', 'notice.views.noticeResource'),
 	url(r'^notice/(?P<notice_id>\d+)/$', 'notice.views.noticeDetailResource'),
+	url(r'^notice/login/$', 'notice.views.Login'),
 )

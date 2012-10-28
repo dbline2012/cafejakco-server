@@ -7,7 +7,6 @@ from community.models import Group
 from membership.models import *
 from django.views.decorators.csrf import csrf_exempt
 from cafejakco.util import serialize, toJson
-from cafejakco.auth import need_auth
 import json
 
 @csrf_exempt
@@ -40,7 +39,6 @@ def memberResource(request):
             return toJson({'status':'create fail'}, 400)
   
 @csrf_exempt
-@need_auth
 def memberDetailResource(request, user_id=1):
     user_id = int(user_id)  
     if request.method == 'GET':
@@ -74,7 +72,6 @@ def couponResource(request):
             return toJson({'status':'create fail'}, 400)
       
 @csrf_exempt
-@need_auth
 def couponDetailResource(request, coupon_id=1):
     coupon_id = int(coupon_id)    
     if request.method == 'GET':
