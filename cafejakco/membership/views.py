@@ -7,7 +7,6 @@ from community.models import Group
 from membership.models import *
 from django.views.decorators.csrf import csrf_exempt
 from cafejakco.util import serialize, toJson
-from cafejakco.auth import need_auth
 import json
 
 @csrf_exempt

@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse, Http404
 from notice.models import *
 from cafejakco.util import serialize, toJson
-from cafejakco.auth import need_auth
+from cafejakco.auth import *
 
 @csrf_exempt
 def noticeResource(request, notice_id=1):
@@ -58,3 +58,8 @@ def noticeDetailResource(request, notice_id=1):
 		except:
 			raise Http404
 	return HttpResponse('/noticeDetailResource')
+
+@csrf_exempt
+@need_auth
+def Login(request):
+	return noticeResource(request)

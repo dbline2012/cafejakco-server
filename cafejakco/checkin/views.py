@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 from checkin.models import *
 from django.views.decorators.csrf import csrf_exempt
 from cafejakco.util import serialize, toJson
-from cafejakco.auth import need_auth
 import json
 
 @csrf_exempt

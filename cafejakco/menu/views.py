@@ -5,7 +5,6 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse, Http404
 from menu.models import *
 from cafejakco.util import serialize, toJson
-from cafejakco.auth import need_auth
 
 @csrf_exempt
 def menuResource(request):

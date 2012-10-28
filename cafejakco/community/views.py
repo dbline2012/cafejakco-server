@@ -6,7 +6,7 @@ from community.models import *
 from django.template import Context, loader
 from django.views.decorators.csrf import csrf_exempt
 from cafejakco.util import serialize, toJson
-from cafejakco.auth import need_auth
+from cafejakco.auth import *
 import json
 
 def index(request):
@@ -63,8 +63,8 @@ def articleResource(request, group_id=1):
 			a.save()
 			return toJson({'status':'create success'})
 		except:
-			return toJson({'status':'create fail'}, 400)
- 
+			return toJson({'status':'create fail'}, 400)			
+
 @csrf_exempt
 def articleDetailResource(request, group_id=1, article_id=1):
 	group_id = int(group_id)	
@@ -84,22 +84,5 @@ def communityImageResource(request):
 
 @csrf_exempt
 @need_auth
-def articlePost(request, group_id=1):
-	group_id = int(group_id)
-	if request.method == 'POST':
-		post_json_data = json.loads(request.raw_post_data)
-		print post_json_data
-		try:
-			u = User.objects.get(id=post.json.data['user_id'])
-			g = Group.objects.get(id=group_id)
-			a = Article(
-						user=u,
-						group=g,
-						title=post_json_data['title'],
-						content=post_json_data['content'],
-						image=post_json_data['image']
-						)
-			a.save()
-			return toJson({'status':'create success'})
-		except:
-			return toJson({'status':'create fail'}, 400)
+def Login(request):
+		return articleResource(request)
