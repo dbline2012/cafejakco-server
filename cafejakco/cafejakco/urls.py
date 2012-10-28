@@ -32,6 +32,7 @@ urlpatterns = patterns('',
     #Community Service
     url(r'^community/$', 'community.views.groupResource'),
     url(r'^community/(?P<group_id>\d+)/$', 'community.views.articleResource'),
+	url(r'^community/(?P<group_id>\d+)/post/$', 'community.views.articlePost'),
     url(r'^community/(?P<group_id>\d+)/(?P<article_id>\d+)/$', 'community.views.articleDetailResource'),
     url(r'^community/image/$', 'community.views.communityImageResource'),
     
