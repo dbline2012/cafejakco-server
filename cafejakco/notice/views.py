@@ -10,7 +10,6 @@ from cafejakco.auth import *
 def noticeResource(request):
 	#print request
 	if request.method == 'GET':
-<<<<<<< HEAD
 		#try:
 		#	notices = Notice.objects.all()
 		#	return toJson(serialize(notices))
@@ -19,14 +18,6 @@ def noticeResource(request):
 
 		notices = Notice.objects.all()
 		return toJson(serialize(notices))
-=======
-		try:
-			notices = Notice.objects.all()
-			print notices
-			return toJson(serialize(notices))
-		except:
-			raise Http404 
->>>>>>> 7f410ac12aff5894f94d3e7d0915842ccd9df7df
 	elif request.method == 'POST':
 		post_json_data = json.loads(request.raw_post_data)
 		try: 
