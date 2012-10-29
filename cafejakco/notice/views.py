@@ -13,6 +13,7 @@ def noticeResource(request, notice_id=1):
 	if request.method == 'GET':
 		try:
 			notices = Notice.objects.all()
+			print notices
 			return toJson(serialize(notices))
 		except:
 			raise Http404 
