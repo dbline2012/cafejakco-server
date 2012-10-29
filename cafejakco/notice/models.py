@@ -8,15 +8,17 @@ class Notice(models.Model):
 	image = models.CharField(max_length=80, null=True)
 
 	def __unicode__(self):
-		return self.name    
+		return self.title
+
 	def save(self, *args, **kwargs):
 		return super(Notice, self).save(*args, **kwargs)
 
 	def serialize(self):
 		data = {
-				'title':self.title_id,
+				'notice_id':self.id,
+				'title':self.title,
 				'content':self.content,
-				'created':self.created,
+				'created':str(self.created),
 				'image':self.image,
 				}
 		return data

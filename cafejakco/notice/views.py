@@ -7,15 +7,17 @@ from cafejakco.util import serialize, toJson
 from cafejakco.auth import *
 
 @csrf_exempt
-def noticeResource(request, notice_id=1):
-	notice_id = int(notice_id)
+def noticeResource(request):
 	#print request
 	if request.method == 'GET':
-		try:
-			notices = Notice.objects.all()
-			return toJson(serialize(notices))
-		except:
-			raise Http404 
+		#try:
+		#	notices = Notice.objects.all()
+		#	return toJson(serialize(notices))
+		#except:
+		#	raise Http404
+
+		notices = Notice.objects.all()
+		return toJson(serialize(notices))
 	elif request.method == 'POST':
 		post_json_data = json.loads(request.raw_post_data)
 		try: 
@@ -36,12 +38,16 @@ def noticeResource(request, notice_id=1):
 def noticeDetailResource(request, notice_id=1):
 	notice_id = int(notice_id)
 	if request.method == 'GET':
-		try:
-			n = Notice.objects.get(id=notice_id)
-			print n
-			return toJson(serialize(n))
-		except:
-			raise Http404
+		#try:
+		#	n = Notice.objects.get(id=notice_id)
+		#	print n
+		#	return toJson(serialize(n))
+		#except:
+		#	raise Http404
+		n = Notice.objects.filter(id=notice_id)
+		print n
+		#return toJson(serialize(n))
+		
 	elif request.method == 'POST':
 		post_json_data = json.loads(request.raw_post_data)
 		try:
