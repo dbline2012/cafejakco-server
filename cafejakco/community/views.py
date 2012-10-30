@@ -8,12 +8,22 @@ from django.views.decorators.csrf import csrf_exempt
 from cafejakco.util import serialize, toJson
 from cafejakco.auth import *
 import json
+from django.core.paginator import Paginator
 
 def index(request):
 	try:
 		articles = Article.objects.all()
-		print articles
-		return toJson(serialize(articles))
+		pages = Paginator(articles, 10)
+		pno = 1
+		try:
+			if request.method == 'GET':
+				pno = request.GET['pno']
+				if int(pno) > pages.num_pages:
+					return toJson([])
+		except:
+			pass
+		print pages.page(pno)
+		return toJson(serialize(pages.page(pno).object_list))
 	except:
 		raise Http404
 
@@ -47,7 +57,24 @@ def articleResource(request, group_id=1):
 			return toJson(serialize(a))        
 		except:
 			raise Http404
-	elif request.method == 'POST':
+
+
+@csrf_exempt
+def articleDetailResource(request, group_id=1, article_id=1):
+	group_id = int(group_id)	
+	article_id = int(article_id)
+	if request.method == 'GET':
+		try:
+			g = Group.objects.get(id=group_id)
+			a = Article.objects.filter(id=article_id)
+			print a
+			return toJson(serialize(a)) 
+		except:
+			raise Http404
+
+@csrf_exempt
+def articlePostResource(request):
+	if request.method == 'POST':
 		post_json_data = json.loads(request.raw_post_data)
 		print post_json_data
 		try:
@@ -63,20 +90,9 @@ def articleResource(request, group_id=1):
 			a.save()
 			return toJson({'status':'create success'})
 		except:
-			return toJson({'status':'create fail'}, 400)			
-
-@csrf_exempt
-def articleDetailResource(request, group_id=1, article_id=1):
-	group_id = int(group_id)	
-	article_id = int(article_id)
-	if request.method == 'GET':
-		try:
-			g = Group.objects.get(id=group_id)
-			a = Article.objects.filter(id=article_id)
-			print a
-			return toJson(serialize(a))        
-		except:
-			raise Http404
+			return toJson({'status':'create fail'}, 400)
+	else:
+		raise Http404
 
 @csrf_exempt
 def communityImageResource(request):

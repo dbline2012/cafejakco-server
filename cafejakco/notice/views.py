@@ -5,12 +5,12 @@ from django.http import HttpResponse, Http404
 from notice.models import *
 from cafejakco.util import serialize, toJson
 from cafejakco.auth import *
+from django.core.paginator import Paginator
 
 @csrf_exempt
 def noticeResource(request):
 	#print request
 	if request.method == 'GET':
-<<<<<<< HEAD
 		#try:
 		#	notices = Notice.objects.all()
 		#	return toJson(serialize(notices))
@@ -18,15 +18,16 @@ def noticeResource(request):
 		#	raise Http404
 
 		notices = Notice.objects.all()
-		return toJson(serialize(notices))
-=======
+		pages = Paginator(notices, 3)
+		pno = 1
 		try:
-			notices = Notice.objects.all()
-			print notices
-			return toJson(serialize(notices))
+			pno = request.GET['pno']
+			if int(pno) > pages.num_pages:
+				return toJson([])
 		except:
-			raise Http404 
->>>>>>> 7f410ac12aff5894f94d3e7d0915842ccd9df7df
+			pass
+		print pages.page(pno)
+		return toJson(serialize(pages.page(pno).object_list))
 	elif request.method == 'POST':
 		post_json_data = json.loads(request.raw_post_data)
 		try: 
