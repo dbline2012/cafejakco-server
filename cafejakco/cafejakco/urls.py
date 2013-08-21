@@ -53,6 +53,4 @@ urlpatterns = patterns('',
 	url(r'^notice/$', 'notice.views.noticeResource'),
 	url(r'^notice/(?P<notice_id>\d+)/$', 'notice.views.noticeDetailResource'),
 	url(r'^notice/login/$', 'notice.views.Login'),
-                       #코드수정
-                       #코드수정#코드수정#코드수정#코드수정#코드수정#코드수정
 )
