@@ -6,6 +6,7 @@ from file.models import UploadFileForm
 from cafejakco import settings
 import logging
 
+
 logger = logging.getLogger(__name__)
 
 @csrf_exempt
