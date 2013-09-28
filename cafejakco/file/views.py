@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 # Create your views here.
-from MyFrontYard.utils import toJson
+from cafejakco.utils import toJson
 from django.views.decorators.csrf import csrf_exempt
 from file.models import UploadFileForm
-from MyFrontYard import settings
+from cafejakco import settings
 import logging
 
 logger = logging.getLogger(__name__)
