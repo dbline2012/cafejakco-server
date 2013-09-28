@@ -80,3 +80,15 @@ def couponDetailResource(request, coupon_id=1):
             return toJson(serialize(c))
         except:
             raise Http404
+        
+@csrf_exempt
+def login(request):
+    if requset.method == 'POST':
+        post_json_data = json.loads(request.raw_post_data)
+        
+        try:
+            user_id=post_json_data['user_id']
+            user_pw=post_json_data['user_pw']
+        except:
+            HttpResponse('fail')
+    return HttpResponse('test')
