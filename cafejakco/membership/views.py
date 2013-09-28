@@ -83,7 +83,7 @@ def couponDetailResource(request, coupon_id=1):
         
 @csrf_exempt
 def login(request):
-    if requset.method == 'POST':
+    if request.method == 'POST':
         post_json_data = json.loads(request.raw_post_data)
         
         try:
