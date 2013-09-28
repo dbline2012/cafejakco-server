@@ -129,6 +129,7 @@ INSTALLED_APPS = (
 	'checkin',
 	'membership',
 	'notice',
+    'file'
 )
 
 # A sample logging configuration. The only tangible logging

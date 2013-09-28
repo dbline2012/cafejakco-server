@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Create your views here.
-from cafejakco.utils import toJson
+from cafejakco.util import toJson
 from django.views.decorators.csrf import csrf_exempt
 from file.models import UploadFileForm
 from cafejakco import settings
