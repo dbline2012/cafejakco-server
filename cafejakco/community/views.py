@@ -50,11 +50,17 @@ def groupResource(request):
 @csrf_exempt
 def articleResource(request, group_id=1):
 	group_id = int(group_id)
+	pno = 1
 	if request.method == 'GET':
 		try:
 			g = Group.objects.get(id=group_id)
 			a = Article.objects.filter(group=g)
-			return toJson(serialize(a))        
+			pages = Paginator(a, 15)
+			pno = request.GET['pno']
+			
+			if pno > pages.num_pages:
+				return toJson([])
+			return toJson(serialize(pages.page(pno).object_list))     
 		except:
 			raise Http404
 
