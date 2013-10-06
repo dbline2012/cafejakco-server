@@ -84,11 +84,11 @@ def articlePostResource(request):
 		post_json_data = json.loads(request.raw_post_data)
 		print post_json_data
 		try:
-			u = User.objects.get(id=post_json_data['user_id'])
-			g = Group.objects.get(id=post_json_data['group_id'])
+			u = User.objects.get(id=int(post_json_data['user_id']))
+			g = Group.objects.get(id=int(post_json_data['group_id']))
 			a = Article(
-						user=int(u),
-						group=int(g),
+						user=u,
+						group=g,
 						title=post_json_data['title'],
 						content=post_json_data['content'],
 						image=post_json_data['image'],
