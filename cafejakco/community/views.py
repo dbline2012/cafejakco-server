@@ -85,7 +85,7 @@ def articlePostResource(request):
 		print post_json_data
 		try:
 			u = User.objects.get(id=post_json_data['user_id'])
-			g = Group.objects.get(id=group_id)
+			g = Group.objects.get(id=post_json_data['group_id'])
 			a = Article(
 						user=u,
 						group=g,
