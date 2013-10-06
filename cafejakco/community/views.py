@@ -12,7 +12,7 @@ from django.core.paginator import Paginator
 
 def index(request):
 	try:
-		articles = Article.objects.all()
+		articles = Article.objects.all().order_by('-created')
 		pages = Paginator(articles, 10)
 		pno = 1
 		try:
@@ -50,16 +50,22 @@ def groupResource(request):
 @csrf_exempt
 def articleResource(request, group_id=1):
 	group_id = int(group_id)
-	pno = 1
+	
+	
 	if request.method == 'GET':
 		try:
 			g = Group.objects.get(id=group_id)
-			a = Article.objects.filter(group=g)
-			pages = Paginator(a, 15)
-			pno = request.GET['pno']
+			a = Article.objects.filter(group=g).order_by('-created')
+				
+			pages = Paginator(a, 10)
+			pno = 1
+			try:
+				pno = request.GET['pno']
+				if int(pno) > pages.num_pages:
+					return toJson([])
+			except:
+				pass
 			
-			if pno > pages.num_pages:
-				return toJson([])
 			return toJson(serialize(pages.page(pno).object_list))     
 		except:
 			raise Http404
