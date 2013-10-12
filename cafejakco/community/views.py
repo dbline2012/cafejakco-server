@@ -11,21 +11,23 @@ import json
 from django.core.paginator import Paginator
 
 def index(request):
-	try:
-		articles = Article.objects.all().order_by('-created')
-		pages = Paginator(articles, 10)
-		pno = 1
-		try:
-			if request.method == 'GET':
-				pno = request.GET['pno']
-				if int(pno) > pages.num_pages:
-					return toJson([])
-		except:
-			pass
-		print pages.page(pno)
-		return toJson(serialize(pages.page(pno).object_list))
-	except:
-		raise Http404
+	return HttpResponse('cafejakco server')
+	
+# 	try:
+# 		articles = Article.objects.all().order_by('-created')
+# 		pages = Paginator(articles, 10)
+# 		pno = 1
+# 		try:
+# 			if request.method == 'GET':
+# 				pno = request.GET['pno']
+# 				if int(pno) > pages.num_pages:
+# 					return toJson([])
+# 		except:
+# 			pass
+# 		print pages.page(pno)
+# 		return toJson(serialize(pages.page(pno).object_list))
+# 	except:
+# 		raise Http404
 
 @csrf_exempt
 def groupResource(request):
@@ -50,8 +52,7 @@ def groupResource(request):
 @csrf_exempt
 def articleResource(request, group_id=1):
 	group_id = int(group_id)
-	
-	
+		
 	if request.method == 'GET':
 		try:
 			g = Group.objects.get(id=group_id)

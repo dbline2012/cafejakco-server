@@ -21,16 +21,14 @@ def memberResource(request):
         try:
             u = User.objects.create_user(
                                          username=post_json_data['username'],
-                                         email=post_json_data['email'],
                                          password=post_json_data['password'],
                                          )
             u = User.objects.get(username=post_json_data['username'])
-            g = Group.objects.get(id=1)
+            g = Group.objects.get(id=3)
             m = Member(
                        user=u,
                        group=g,
                        nickname=post_json_data['nickname'],
-                       sex=post_json_data['sex'],
                        image=post_json_data['image'],
                        )
             m.save()
