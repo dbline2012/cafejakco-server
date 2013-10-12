@@ -91,9 +91,8 @@ def login(request):
             password=post_json_data['password']
             user = authenticate(username=username, password=password)
             if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return HttpResponse({'status':'login success'})
+                login(request, user)
+                return HttpResponse({'status':'login success'})
         except:
             HttpResponse({'status':'login fail'})
             
