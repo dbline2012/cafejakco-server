@@ -7,6 +7,7 @@ from community.models import Group
 from membership.models import *
 from django.views.decorators.csrf import csrf_exempt
 from cafejakco.util import serialize, toJson
+from django.contrib.auth import authenticate, login, logout
 import json
 
 @csrf_exempt
@@ -22,6 +23,7 @@ def memberResource(request):
             u = User.objects.create_user(
                                          username=post_json_data['username'],
                                          password=post_json_data['password'],
+                                         email=post_json_data['username']
                                          )
             u = User.objects.get(username=post_json_data['username'])
             g = Group.objects.get(id=3)
@@ -85,8 +87,23 @@ def login(request):
         post_json_data = json.loads(request.raw_post_data)
         
         try:
-            user_id=post_json_data['user_id']
-            user_pw=post_json_data['user_pw']
+            username=post_json_data['username']
+            password=post_json_data['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponse({'status':'login success'})
         except:
-            HttpResponse('fail')
-    return HttpResponse('test')
+            HttpResponse({'status':'login fail'})
+            
+    return HttpResponse({'status':'login fail'})
+
+
+@csrf_exempt
+def logout(request):
+    try:
+        logout(request)
+    except:
+        return HttpResponse({'status':'logout fail'})
+    return HttpResponse({'status':'logout success'})
