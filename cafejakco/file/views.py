@@ -9,7 +9,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-@csrf_exempt
+
 def FileHandler(request):
     if request.method == 'POST':
         if 'file' in request.FILES:
@@ -24,7 +24,7 @@ def FileHandler(request):
             return toJson({'status':'success'})
     return toJson({'status':'fail'})
 
-@csrf_exempt
+
 def upload_file(request):
     if request.method == 'POST':
         form = UploadFileForm(request.FILES)

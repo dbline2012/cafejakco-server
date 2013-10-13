@@ -29,7 +29,7 @@ def index(request):
 # 	except:
 # 		raise Http404
 
-@csrf_exempt
+
 def groupResource(request):
 	if request.method == 'GET':
 		try:
@@ -49,7 +49,7 @@ def groupResource(request):
 		print 'DELETE method'
 	return HttpResponse('Func:groupResource')
 
-@csrf_exempt
+
 def articleResource(request, group_id=1):
 	group_id = int(group_id)
 		
@@ -72,7 +72,6 @@ def articleResource(request, group_id=1):
 			raise Http404
 
 
-@csrf_exempt
 def articleDetailResource(request, group_id=1, article_id=1):
 	group_id = int(group_id)	
 	article_id = int(article_id)
@@ -85,7 +84,7 @@ def articleDetailResource(request, group_id=1, article_id=1):
 		except:
 			raise Http404
 
-@csrf_exempt
+
 def articlePostResource(request):
 	if request.method == 'POST':
 		post_json_data = json.loads(request.raw_post_data)
@@ -107,11 +106,6 @@ def articlePostResource(request):
 	else:
 		raise Http404
 
-@csrf_exempt
+
 def communityImageResource(request):
 	return HttpResponse('/community/image')
-
-@csrf_exempt
-@need_auth
-def Login(request):
-		return articleResource(request)

@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from cafejakco.util import serialize, toJson
 import json
 
-@csrf_exempt
+
 def checkinResource(request):
     if request.method == 'GET':
         try:
@@ -31,7 +31,7 @@ def checkinResource(request):
         except:
             return toJson({'status':'create fail'}, 400)
 
-@csrf_exempt
+
 def userCheckinResource(request, user_id=1):
     user_id = int(user_id)
     

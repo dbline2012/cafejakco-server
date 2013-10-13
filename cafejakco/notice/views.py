@@ -7,7 +7,6 @@ from cafejakco.util import serialize, toJson
 from cafejakco.auth import *
 from django.core.paginator import Paginator
 
-@csrf_exempt
 def noticeResource(request):
 	#print request
 	if request.method == 'GET':
@@ -44,7 +43,7 @@ def noticeResource(request):
 #		print 'deleted'
 #	return HttpResponse('/notice')
 
-@csrf_exempt
+
 def noticeDetailResource(request, notice_id=1):
 	notice_id = int(notice_id)
 	if request.method == 'GET':
@@ -74,8 +73,3 @@ def noticeDetailResource(request, notice_id=1):
 		except:
 			raise Http404
 	return HttpResponse('/noticeDetailResource')
-
-@csrf_exempt
-@need_auth
-def Login(request):
-	return noticeResource(request)

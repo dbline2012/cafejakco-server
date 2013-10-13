@@ -8,7 +8,7 @@ from menu.models import *
 from cafejakco.util import serialize, toJson
 import json
 
-@csrf_exempt
+
 def menuResource(request, menu_id=1):
 	menu_id = int(menu_id)
 	if request.method == 'GET':
@@ -38,7 +38,7 @@ def menuResource(request, menu_id=1):
 		print 'deleted'
 	return HttpResponse('Func:menuResource')
 
-@csrf_exempt
+
 def menuDetailResource(request, menu_id=1):
 	menu_id = int(menu_id)
 	if request.method == 'GET':
