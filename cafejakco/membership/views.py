@@ -10,6 +10,7 @@ from cafejakco.util import serialize, toJson
 from django.contrib.auth import authenticate, login, logout
 import json
 
+@csrf_exempt
 def memberResource(request):
     if request.method == 'GET':
         members = Member.objects.all()
@@ -33,10 +34,11 @@ def memberResource(request):
                        image=post_json_data['image'],
                        )
             m.save()
-            return toJson({'status':'create success'})
+            return toJson([{'status':'success', "message":"member joined success"}])
         except:
-            return toJson({'status':'create fail'}, 400)
-  
+            return toJson([{'status':'fail', "message":"member joined success"}])
+
+@csrf_exempt
 def memberDetailResource(request, user_id=1):
     user_id = int(user_id)  
     if request.method == 'GET':
@@ -47,7 +49,7 @@ def memberDetailResource(request, user_id=1):
         except:
             raise Http404
         
-@csrf_exempt
+        
 def couponResource(request):
     if request.method == 'GET':
         try:
@@ -65,9 +67,9 @@ def couponResource(request):
                        end=post_json_data['end'],
                        )
             c.save()  
-            return toJson({'status':'create success'})
+            return toJson([{'status':'create success'}])
         except:
-            return toJson({'status':'create fail'}, 400)
+            return toJson([{'status':'create fail'}], 400)
       
 def couponDetailResource(request, coupon_id=1):
     coupon_id = int(coupon_id)    
@@ -78,6 +80,7 @@ def couponDetailResource(request, coupon_id=1):
         except:
             raise Http404
         
+@csrf_exempt
 def login(request):
     if request.method == 'POST':
         post_json_data = json.loads(request.raw_post_data)
@@ -86,16 +89,15 @@ def login(request):
             username=post_json_data['username']
             password=post_json_data['password']
             user = authenticate(username=username, password=password)
-            print username, password, user
             if user is not None:
                 if user.is_active:
-                    print 'user is valid : %s' % (user)
-                    #login(request, user)
-                    return toJson({'status':'login success'})
+                    m = Member.objects.get(user=user)
+                    print '[login] user is logined : %s' % (m)
+                    return toJson(serialize(m))
         except:
-            return toJson({'status':'login fail'})
+            return toJson([{'status':'fail', 'message':'login fail'}])
             
-    return toJson({'status':'login fail'})
+        return toJson([{'status':'fail', 'message':'login fail'}])
 
 
 def logout(request):

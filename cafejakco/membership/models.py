@@ -12,7 +12,7 @@ class Member(models.Model):
     image = models.CharField(max_length=80, null=True)
     
     def __unicode__(self):
-        return self.nickname    
+        return self.user.username    
 
     def save(self, *args, **kwargs):
         return super(Member, self).save(*args, **kwargs)

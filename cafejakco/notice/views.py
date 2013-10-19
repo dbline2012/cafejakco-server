@@ -27,21 +27,6 @@ def noticeResource(request):
 			pass
 		print pages.page(pno)
 		return toJson(serialize(pages.page(pno).object_list))
-#	elif request.method == 'POST':
-#		post_json_data = json.loads(request.raw_post_data)
-#		try: 
-#			n = Notice(
-#						title=post_json_data['title'],
-#						content=post_json_data['content'],
-#						created=post_json_data['created'],
-#						)
-#			n.save()
-#			return toJson({'status':'create success'})
-#		except:
-#			return toJson({'status':'create fail'})
-#	elif request.method == 'DELETE':
-#		print 'deleted'
-#	return HttpResponse('/notice')
 
 
 def noticeDetailResource(request, notice_id=1):
@@ -64,9 +49,9 @@ def noticeDetailResource(request, notice_id=1):
 						image=post_json_data['image'],
 					)
 			n.save()
-			return toJson({'status':'create success'})
+			return toJson([{'status':'success'}])
 		except:
-			return toJson({'status':'create fail'})
+			return toJson([{'status':'fail'}])
 	elif request.method == 'DELETE':
 		try:
 			print 'deleted'

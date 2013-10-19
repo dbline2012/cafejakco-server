@@ -52,4 +52,4 @@ def menuDetailResource(request, menu_id=1):
 		pass
 	elif request.method == 'DELETE':
 		print 'deleted'
-	return HttpResponse('Func:menuDetailResource')	
+	return HttpResponse('Func:menuDetailResource')

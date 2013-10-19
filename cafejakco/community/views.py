@@ -42,14 +42,14 @@ def groupResource(request):
 		try:
 			g = Group(name=post_json_data['name'])
 			g.save()
-			return toJson({'status':'create success'})
+			return toJson([{'status':'success'}])
 		except:
-			return toJson({'status':'create fail'}, 400)
+			return toJson([{'status':'fail'}])
 	elif request.method == 'DELETE':
 		print 'DELETE method'
 	return HttpResponse('Func:groupResource')
 
-
+@csrf_exempt
 def articleResource(request, group_id=1):
 	group_id = int(group_id)
 		
@@ -71,7 +71,7 @@ def articleResource(request, group_id=1):
 		except:
 			raise Http404
 
-
+@csrf_exempt
 def articleDetailResource(request, group_id=1, article_id=1):
 	group_id = int(group_id)	
 	article_id = int(article_id)
@@ -84,11 +84,11 @@ def articleDetailResource(request, group_id=1, article_id=1):
 		except:
 			raise Http404
 
-
+@csrf_exempt
 def articlePostResource(request):
 	if request.method == 'POST':
 		post_json_data = json.loads(request.raw_post_data)
-		print post_json_data
+		print '[articlePostResource]', post_json_data
 		try:
 			u = User.objects.get(id=int(post_json_data['user_id']))
 			g = Group.objects.get(id=int(post_json_data['group_id']))
@@ -100,9 +100,9 @@ def articlePostResource(request):
 						image=post_json_data['image'],
 						)
 			a.save()
-			return toJson({'status':'create success'})
+			return toJson([{'status':'success', 'message':'article upload success'}])
 		except:
-			return toJson({'status':'create fail'}, 400)
+			return toJson([{'status':'fail', 'message':'artile upload fail'}])
 	else:
 		raise Http404
 
