@@ -6,7 +6,7 @@ from community.models import Group
 class Member(models.Model):
     user = models.ForeignKey(User)
     group = models.ForeignKey(Group)
-    sex = models.CharField(max_length=10, null=False)
+    sex = models.CharField(max_length=10, null=True)
     nickname = models.CharField(max_length=20, null=False)
     point = models.PositiveIntegerField(default=0, null=True)
     image = models.CharField(max_length=80, null=True)
