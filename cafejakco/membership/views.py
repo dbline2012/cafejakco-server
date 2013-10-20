@@ -26,8 +26,7 @@ def memberResource(request):
                                          email=post_json_data['username']
                                          )
             u = User.objects.get(username=post_json_data['username'])
-            g = Group.objects.get(id=3)
-            
+            g = Group.objects.get(id=post_json_data['group_id'])
             
             m = Member(
                        user=u,
