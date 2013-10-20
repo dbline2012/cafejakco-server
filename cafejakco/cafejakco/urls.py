@@ -56,6 +56,7 @@ urlpatterns = patterns('',
     
     # Upload
     url(r'^upload/$', 'file.views.FileHandler'),
+    url(r'^upload/user$', 'file.views.UserFileHandler'),
     
     # Login & Logout
     url(r'^login/$', 'membership.views.login'),

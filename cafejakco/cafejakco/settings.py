@@ -70,6 +70,7 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     ROOT_PATH + '/templates/static',
+    ROOT_PATH + '/templates/user',
 )
 
 # List of finder classes that know how to find static files in

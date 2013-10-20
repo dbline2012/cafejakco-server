@@ -2,13 +2,14 @@
 # Create your views here.
 from django.http import HttpResponse, Http404
 from django.contrib.auth.models import User
-from community.models import *
+from django.core.paginator import Paginator
 from django.template import Context, loader
 from django.views.decorators.csrf import csrf_exempt
 from cafejakco.util import serialize, toJson
 from cafejakco.auth import need_auth
+from cafejakco import settings
+from community.models import *
 import json
-from django.core.paginator import Paginator
 
 def index(request):
 	return HttpResponse('cafejakco server')
@@ -87,24 +88,24 @@ def articleDetailResource(request, group_id=1, article_id=1):
 @csrf_exempt
 def articlePostResource(request):
 	if request.method == 'POST':
-		post_json_data = json.loads(request.raw_post_data)
-		print '[articlePostResource]', post_json_data
-		try:
-			u = User.objects.get(id=int(post_json_data['user_id']))
-			g = Group.objects.get(id=int(post_json_data['group_id']))
-			a = Article(
-						user=u,
-						group=g,
-						title=post_json_data['title'],
-						content=post_json_data['content'],
-						image=post_json_data['image'],
-						)
-			a.save()
-			return toJson([{'status':'success', 'message':'article upload success'}])
-		except:
-			return toJson([{'status':'fail', 'message':'artile upload fail'}])
+   		post_json_data = json.loads(request.raw_post_data)
+   		print '[articlePostResource]', post_json_data
+ 		try:
+ 			u = User.objects.get(id=int(post_json_data['user_id']))
+ 			g = Group.objects.get(id=int(post_json_data['group_id']))
+ 			a = Article(
+ 						user=u,
+ 						group=g,
+ 						title=post_json_data['title'],
+ 						content=post_json_data['content'],
+ 						image=post_json_data['image'],
+ 						)
+ 			a.save()
+ 			return toJson([{'status':'success', 'message':'article upload success'}])
+ 		except:
+ 			return toJson([{'status':'fail', 'message':'artile upload fail'}])
 	else:
-		raise Http404
+		raise toJson([{'status':'fail'}])
 
 
 def communityImageResource(request):

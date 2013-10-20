@@ -18,7 +18,7 @@ def memberResource(request):
     
     elif request.method == 'POST':
         post_json_data = json.loads(request.raw_post_data)
-        
+        print 'memberResource : ', post_json_data
         try:
             u = User.objects.create_user(
                                          username=post_json_data['username'],
@@ -27,16 +27,19 @@ def memberResource(request):
                                          )
             u = User.objects.get(username=post_json_data['username'])
             g = Group.objects.get(id=3)
+            
+            
             m = Member(
                        user=u,
                        group=g,
                        nickname=post_json_data['nickname'],
                        image=post_json_data['image'],
+                       sex=post_json_data['sex']
                        )
             m.save()
             return toJson([{'status':'success', "message":"member joined success"}])
         except:
-            return toJson([{'status':'fail', "message":"member joined success"}])
+            return toJson([{'status':'fail', "message":"member joined fail"}])
 
 @csrf_exempt
 def memberDetailResource(request, user_id=1):

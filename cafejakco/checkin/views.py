@@ -27,9 +27,9 @@ def checkinResource(request):
                          user=u,
                          )
             ch.save()
-            return toJson({'status':'create success'})
+            return toJson([{'status':'success', 'message':'checkin success'}])
         except:
-            return toJson({'status':'create fail'}, 400)
+            return toJson([{'status':'fail'}], 400)
 
 
 def userCheckinResource(request, user_id=1):
