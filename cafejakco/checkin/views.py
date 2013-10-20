@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from cafejakco.util import serialize, toJson
 import json
 
-
+@csrf_exempt
 def checkinResource(request):
     if request.method == 'GET':
         try:
